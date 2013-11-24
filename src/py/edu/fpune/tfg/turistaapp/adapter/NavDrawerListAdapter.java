@@ -2,8 +2,8 @@ package py.edu.fpune.tfg.turistaapp.adapter;
 
 import java.util.ArrayList;
 
-import py.edu.fpune.tfg.turistaapp.NavDrawerItem;
 import py.edu.fpune.tfg.turistaapp.R;
+import py.edu.fpune.tfg.turistaapp.model.NavDrawerItem;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
