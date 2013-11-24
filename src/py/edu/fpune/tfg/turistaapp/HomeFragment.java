@@ -14,14 +14,14 @@ public class HomeFragment extends Fragment {
 	ListView listView;
 	String[] monthsArray = { "JAN", "FEB", "MAR", "APR", "MAY", "JUNE", "JULY",
 			 "AUG", "SEPT", "OCT", "NOV", "DEC" };
-	ArrayAdapter arrayAdapter;
+	ArrayAdapter<String> arrayAdapter;
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 		listView = (ListView) rootView.findViewById(R.id.list_home);
-		arrayAdapter = new ArrayAdapter(rootView.getContext(), android.R.layout.simple_list_item_1, monthsArray);
+		arrayAdapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_list_item_1, monthsArray);
         listView.setAdapter(arrayAdapter);
 		return rootView;
     }
