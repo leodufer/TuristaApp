@@ -20,4 +20,8 @@
 <resources>
     <color name="pressed_styleturista">#CC058787</color>
     <color name="verde">#058787</color>
+   	<color name="red_complementary">#870505</color>
+   	<color name="verde_degra1">#046e6e</color>
+   	<color name="verde_degra2">#035656</color>
+   	<color name="verde_degra3">#023d3d</color>
 </resources>

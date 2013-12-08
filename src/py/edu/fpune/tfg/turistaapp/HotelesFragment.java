@@ -27,10 +27,18 @@ public class HotelesFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Fragment detalleFragment = new DetalleFragment();
+				
+				//Paso de parametros
+				String nombre="Hotel Kai";
+				Bundle parametro = new Bundle();
+				parametro.putString("nombre", nombre);
+				
+				detalleFragment.setArguments(parametro);
+				
 				FragmentManager fragmentManager = getFragmentManager();
 				fragmentManager.beginTransaction()
 						.replace(R.id.frame_container, detalleFragment)
-						.addToBackStack(null)
+						//.addToBackStack(null)
 						.commit();
 				
 			}
