@@ -1,8 +1,9 @@
 package py.edu.fpune.tfg.turistaapp.adapter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import py.edu.fpune.tfg.turistaapp.R;
+import py.edu.fpune.tfg.turistaapp.model.Categoria;
 import py.edu.fpune.tfg.turistaapp.model.Lugar;
 import android.app.Activity;
 import android.content.Context;
@@ -15,10 +16,10 @@ import android.widget.TextView;
 
 public class LugaresAdapter extends BaseAdapter{
 	protected Activity activity;
-    protected ArrayList<Lugar> items;
+    protected List<Lugar> items;
     
     
-    public LugaresAdapter(Activity activity, ArrayList<Lugar> items){
+    public LugaresAdapter(Activity activity, List<Lugar> items){
     	this.activity=activity;
     	this.items=items;
     }
@@ -50,8 +51,15 @@ public class LugaresAdapter extends BaseAdapter{
         
      // Creamos un objeto Lugar
         Lugar l = items.get(position);
-        //Rellenamos la fotografía TODO
+        //Rellenamos la fotografía
+        Categoria c = l.getCategoria();
         ImageView foto = (ImageView) v.findViewById(R.id.image_detalle);
+        if(c.getId()==1){
+        	foto.setImageResource(R.drawable.ic_hotel);
+        }
+        if(c.getId()==2){
+        	foto.setImageResource(R.drawable.ic_restaurant);
+        }
         
         //Rellenamos el nombre
         TextView nombre = (TextView) v.findViewById(R.id.text_nombre_detalle);

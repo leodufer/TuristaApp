@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ public class DetalleFragment extends Fragment {
 	private TextView text_nombre;
 	private TextView text_detalle;
 	private TextView text_direccion;
+	private ImageView imagen_detalle;
 	
 	public DetalleFragment(){}
 	
@@ -52,10 +54,11 @@ public class DetalleFragment extends Fragment {
         Lugar l = new Lugar();
         l.setId(getArguments().getInt("id"));
         l.setNombre(getArguments().getString("nombre"));
-        l.setDetalle(getArguments().getString("detalle"));
+        l.setDescripcion(getArguments().getString("detalle"));
         l.setDireccion(getArguments().getString("direccion"));
         l.setLatitud(getArguments().getDouble("latitud"));
         l.setLongitud(getArguments().getDouble("longitud"));
+        int c = getArguments().getInt("categoria");
         mapLatLng = new LatLng(l.getLatitud(), l.getLongitud());
         
         map = ((MapFragment)getFragmentManager().findFragmentById(R.id.maps_fragment)).getMap();
@@ -70,11 +73,19 @@ public class DetalleFragment extends Fragment {
         text_nombre.setText(l.getNombre());
         
         text_detalle= (TextView) rootView.findViewById(R.id.text_detalle);
-        text_detalle.setText(l.getDetalle());
+        text_detalle.setText(l.getDescripcion());
         
         text_direccion= (TextView) rootView.findViewById(R.id.text_direccion);
         text_direccion.setText(l.getDireccion());
-         
+        
+        imagen_detalle = (ImageView) rootView.findViewById(R.id.image_detalle);
+        if(c==1){
+        	imagen_detalle.setImageResource(R.drawable.ic_hotel);
+        }
+        if(c==2){
+        	imagen_detalle.setImageResource(R.drawable.ic_restaurant);
+        }
+           
         return rootView;
     }
 	
