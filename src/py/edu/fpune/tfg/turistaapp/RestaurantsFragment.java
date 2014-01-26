@@ -63,7 +63,9 @@ public class RestaurantsFragment extends Fragment {
 				parametro.putDouble("latitud", l.getLatitud());
 				parametro.putDouble("longitud", l.getLongitud());
 				parametro.putInt("categoria", l.getCategoria().getId());
-				
+				parametro.putString("telefono", l.getTelefono());
+				parametro.putString("email", l.getEmail());
+				parametro.putString("web", l.getWeb());
 				detalleFragment.setArguments(parametro);
 				
 				FragmentManager fragmentManager = getFragmentManager();
@@ -100,6 +102,9 @@ public class RestaurantsFragment extends Fragment {
 		
 		@Override
 		protected void onPostExecute(Void result) {
+			if(lugares.size()<1){
+				Toast.makeText(getActivity(), "No se pudo conectar con el servidor", Toast.LENGTH_SHORT).show();;
+			}
 			adapter = new LugaresAdapter(getActivity(), lugares);
 			listView.setAdapter(adapter);
 			progressBar.setVisibility(ProgressBar.GONE);

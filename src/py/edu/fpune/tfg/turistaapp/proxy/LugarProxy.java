@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -19,34 +20,47 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 public class LugarProxy {
-	final static String URL_SERVICE="http://192.168.1.100:8080/turista-app-server/service/lugares";
-	final static String URL_SERVICE_HOTELES="http://192.168.1.100:8080/turista-app-server/service/lugares/hoteles";
-	final static String URL_SERVICE_RESTAURANTES="http://192.168.1.100:8080/turista-app-server/service/lugares/restaurantes";
+	
+	//final static String URL_HOST = "http://turista.leodufer.cloudbees.net/";
+	final static String URL_HOST ="http://192.168.1.104:8080/turista-app-server/";
+	final static String URL_SERVICE=URL_HOST+"service/lugares";
+	final static String URL_SERVICE_HOTELES=URL_HOST+"service/lugares/hoteles";
+	final static String URL_SERVICE_RESTAURANTES=URL_HOST+"service/lugares/restaurantes";
+	
 	public List<Lugar> getLugar(){
+		try{
 		Gson gson = new Gson();
 		InputStream source = doGet(new HttpGet(URL_SERVICE));
 		Reader reader = new InputStreamReader(source);
 		LugaresResult response = gson.fromJson(reader, LugaresResult.class);
-	    
-		return response.result;
+			return response.result;
+		}catch(Exception e){
+			return new ArrayList<Lugar>();	
+		}
 	}
 	
 	public List<Lugar> getHoteles(){
+		try{
 		Gson gson = new Gson();
 		InputStream source = doGet(new HttpGet(URL_SERVICE_HOTELES));
 		Reader reader = new InputStreamReader(source);
 		LugaresResult response = gson.fromJson(reader, LugaresResult.class);
-	    
-		return response.result;
+	    	return response.result;
+		}catch(Exception e){
+			return new ArrayList<Lugar>();	
+		}
 	}
 	
 	public List<Lugar> getRestaurantes(){
+		try{
 		Gson gson = new Gson();
 		InputStream source = doGet(new HttpGet(URL_SERVICE_RESTAURANTES));
 		Reader reader = new InputStreamReader(source);
-		LugaresResult response = gson.fromJson(reader, LugaresResult.class);
-	    
-		return response.result;
+		LugaresResult response = gson.fromJson(reader, LugaresResult.class); 
+			return response.result;
+		}catch(Exception e){
+			return new ArrayList<Lugar>();	
+		}
 	}
 	
 	public static InputStream doGet(HttpGet requestp){

@@ -4,6 +4,7 @@ package py.edu.fpune.tfg.turistaapp;
 
 import py.edu.fpune.tfg.turistaapp.model.Lugar;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -32,6 +33,7 @@ public class DetalleFragment extends Fragment {
 	private TextView text_detalle;
 	private TextView text_direccion;
 	private ImageView imagen_detalle;
+	private Lugar l = new Lugar();
 	
 	public DetalleFragment(){}
 	
@@ -40,7 +42,16 @@ public class DetalleFragment extends Fragment {
             Bundle savedInstanceState) {
  
         View rootView = inflater.inflate(R.layout.fragment_detalle, container, false);
-         
+        l.setId(getArguments().getInt("id"));
+        l.setNombre(getArguments().getString("nombre"));
+        l.setDescripcion(getArguments().getString("detalle"));
+        l.setDireccion(getArguments().getString("direccion"));
+        l.setLatitud(getArguments().getDouble("latitud"));
+        l.setLongitud(getArguments().getDouble("longitud"));
+        l.setTelefono(getArguments().getString("telefono"));
+        l.setEmail(getArguments().getString("email"));
+        l.setWeb(getArguments().getString("web"));
+        int c = getArguments().getInt("categoria");
         layout = (LinearLayout) rootView.findViewById(R.id.layout_detalle);    
         layout.setOnTouchListener(new OnTouchListener() {
 			
@@ -51,14 +62,10 @@ public class DetalleFragment extends Fragment {
 			}
 		});
         
-        Lugar l = new Lugar();
-        l.setId(getArguments().getInt("id"));
-        l.setNombre(getArguments().getString("nombre"));
-        l.setDescripcion(getArguments().getString("detalle"));
-        l.setDireccion(getArguments().getString("direccion"));
-        l.setLatitud(getArguments().getDouble("latitud"));
-        l.setLongitud(getArguments().getDouble("longitud"));
-        int c = getArguments().getInt("categoria");
+        
+        
+        
+        
         mapLatLng = new LatLng(l.getLatitud(), l.getLongitud());
         
         map = ((MapFragment)getFragmentManager().findFragmentById(R.id.maps_fragment)).getMap();
@@ -99,7 +106,25 @@ public class DetalleFragment extends Fragment {
 	}
 	
 	private void on_touch_detalle(){
-		Toast.makeText(getActivity(), "Touch Detalle", Toast.LENGTH_SHORT).show();
+		
+		Bundle parametro = new Bundle();
+		parametro.putInt("id", l.getId());
+		parametro.putString("nombre", l.getNombre());
+		parametro.putString("detalle", l.getDescripcion());
+		parametro.putString("direccion", l.getDireccion());
+		parametro.putDouble("latitud", l.getLatitud());
+		parametro.putDouble("longitud", l.getLongitud());
+		parametro.putString("telefono", l.getTelefono());
+		parametro.putString("email", l.getEmail());
+		parametro.putString("web", l.getWeb());
+		//parametro.putInt("categoria", l.getCategoria().getId());
+		Fragment fragment = new MasDetallesFragment();
+		fragment.setArguments(parametro);
+		FragmentManager fragmentManager = getFragmentManager();
+		fragmentManager.beginTransaction()
+				.replace(R.id.frame_container, fragment).commit();
+
+		//Toast.makeText(getActivity(), "Touch Detalle", Toast.LENGTH_SHORT).show();
 	}
 }
 

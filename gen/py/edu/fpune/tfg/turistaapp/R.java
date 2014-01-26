@@ -279,32 +279,46 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f05000c;
-        public static final int action_settings=0x7f05001c;
+        public static final int action_settings=0x7f05002a;
+        public static final int button_como=0x7f050026;
+        public static final int button_share=0x7f050027;
         public static final int counter=0x7f05000a;
         public static final int drawer_layout=0x7f050005;
         public static final int fragment_hoteles=0x7f050015;
         public static final int frame_container=0x7f050006;
         public static final int hybrid=0x7f050004;
         public static final int icon=0x7f050008;
+        public static final int imageView1=0x7f050024;
+        public static final int imageView2=0x7f050021;
+        public static final int imageView3=0x7f05001e;
         public static final int image_detalle=0x7f05000f;
         public static final int layout_detalle=0x7f05000e;
-        public static final int list_home=0x7f050013;
-        public static final int list_hotel=0x7f050016;
-        public static final int list_restaurant=0x7f050018;
+        public static final int layout_email=0x7f05001f;
+        public static final int layout_share=0x7f050025;
+        public static final int layout_telefono=0x7f05001c;
+        public static final int layout_web=0x7f050022;
+        public static final int list_home=0x7f050014;
+        public static final int list_hotel=0x7f050017;
+        public static final int list_restaurant=0x7f050029;
         public static final int list_slidermenu=0x7f050007;
         public static final int maps_fragment=0x7f05000d;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int progressBarHome=0x7f050014;
-        public static final int progressBarHoteles=0x7f050017;
-        public static final int progressBarRestaurant=0x7f050019;
+        public static final int progressBarHome=0x7f050013;
+        public static final int progressBarHoteles=0x7f050016;
+        public static final int progressBarRestaurant=0x7f050028;
         public static final int satellite=0x7f050002;
+        public static final int scrollView1=0x7f050018;
         public static final int terrain=0x7f050003;
+        public static final int text_descripcion_detalle=0x7f05001b;
         public static final int text_detalle=0x7f050011;
         public static final int text_direccion=0x7f050012;
-        public static final int text_direccion_detalle=0x7f05001b;
+        public static final int text_direccion_detalle=0x7f05001a;
+        public static final int text_email_detalle=0x7f050020;
         public static final int text_nombre=0x7f050010;
-        public static final int text_nombre_detalle=0x7f05001a;
+        public static final int text_nombre_detalle=0x7f050019;
+        public static final int text_telefono_detalle=0x7f05001d;
+        public static final int text_web_detalle=0x7f050023;
         public static final int title=0x7f050009;
         public static final int txtLabel=0x7f05000b;
     }
@@ -320,8 +334,9 @@ containing a value of this type.
         public static final int fragment_eventos=0x7f030005;
         public static final int fragment_home=0x7f030006;
         public static final int fragment_hoteles=0x7f030007;
-        public static final int fragment_restaurants=0x7f030008;
-        public static final int item_list=0x7f030009;
+        public static final int fragment_mas=0x7f030008;
+        public static final int fragment_restaurants=0x7f030009;
+        public static final int item_list=0x7f03000a;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
