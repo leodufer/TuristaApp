@@ -122,7 +122,7 @@ public class DetalleFragment extends Fragment {
 		fragment.setArguments(parametro);
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
-				.replace(R.id.frame_container, fragment).commit();
+				.replace(R.id.frame_container, fragment).addToBackStack(null).commit();
 
 		//Toast.makeText(getActivity(), "Touch Detalle", Toast.LENGTH_SHORT).show();
 	}

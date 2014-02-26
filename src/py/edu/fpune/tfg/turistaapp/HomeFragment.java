@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class HomeFragment extends Fragment {
 	List<Lugar> lugares = new ArrayList<Lugar>();
 	LugaresAdapter adapter;
 	public ProgressBar progressBar;
+	public ImageView img_network_error;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,9 +40,14 @@ public class HomeFragment extends Fragment {
 		listView = (ListView) rootView.findViewById(R.id.list_home);       
         progressBar = (ProgressBar)  rootView.findViewById(R.id.progressBarHome);
         progressBar.setVisibility(ProgressBar.INVISIBLE);
+        
+        img_network_error = (ImageView) rootView.findViewById(R.id.image_network_error);
+        img_network_error.setVisibility(ImageView.INVISIBLE);
+        
 		if(Util.networkAvailable(rootView.getContext())){
 	    	 new LugaresAsyncTask().execute();
 	     }else{
+	    	 img_network_error.setVisibility(ImageView.VISIBLE);
 	    	 Toast t = Toast.makeText(rootView.getContext(), "No se dispone de una conexion de red", Toast.LENGTH_LONG);
 	    	 t.show();
 	     }
@@ -71,7 +78,7 @@ public class HomeFragment extends Fragment {
 				FragmentManager fragmentManager = getFragmentManager();
 				fragmentManager.beginTransaction()
 						.replace(R.id.frame_container, detalleFragment)
-						//.addToBackStack(null)
+						.addToBackStack(null)
 						.commit();
 			}
 		});
@@ -96,7 +103,7 @@ public class HomeFragment extends Fragment {
 			
 			LugarProxy lp = new LugarProxy();
 			
-			lugares = lp.getLugar();
+			lugares = lp.getLugar(getActivity().getApplicationContext());
 				
 			return null;
 		}
@@ -104,7 +111,10 @@ public class HomeFragment extends Fragment {
 		@Override
 		protected void onPostExecute(Void result) {
 			if(lugares.size()<1){
+				img_network_error.setVisibility(ImageView.VISIBLE);
 				Toast.makeText(getActivity(), "No se pudo conectar con el servidor", Toast.LENGTH_SHORT).show();;
+			}else{
+				img_network_error.setVisibility(ImageView.GONE);
 			}
 			adapter = new LugaresAdapter(getActivity(), lugares);
 			listView.setAdapter(adapter);

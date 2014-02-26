@@ -14,6 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/list_item_title"
             android:orientation="vertical" >
 
             <TextView
@@ -57,14 +58,15 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:text="Telefono"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
+                <ImageButton
+                    android:id="@+id/imageButtonCall"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@android:drawable/sym_action_call" />
+                    android:background="@color/list_item_title"
+                    android:src="@drawable/android_phone_64" />
 
             </LinearLayout>
 
@@ -82,14 +84,15 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:text="Email"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                <ImageButton
+                    android:id="@+id/imageButtonEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@android:drawable/sym_action_email" />
+                    android:background="@color/list_item_title"
+                    android:src="@drawable/android_email_64" />
 
             </LinearLayout>
 
@@ -107,14 +110,15 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:text="Web"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                <ImageButton
+                    android:id="@+id/imageButtonWeb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@android:drawable/ic_menu_mapmode" />
+                    android:background="@color/list_item_title"
+                    android:src="@drawable/android_browser_64" />
 
             </LinearLayout>
 
@@ -131,14 +135,19 @@
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Como Llegar" />
+                    android:background="@color/verde_2"
+                    android:text="Como Llegar"
+                    android:textColor="@color/list_item_title" />
 
                 <Button
                     android:id="@+id/button_share"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Compartir" />
+                    android:layout_marginTop="5dp"
+                    android:background="@color/verde_2"
+                    android:text="Compartir"
+                    android:textColor="@color/list_item_title" />
 
             </LinearLayout>
 

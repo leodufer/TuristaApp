@@ -15,27 +15,34 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import py.edu.fpune.tfg.turistaapp.model.Lugar;
+import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
 
 public class LugarProxy {
 	
-	//final static String URL_HOST = "http://turista.leodufer.cloudbees.net/";
-	final static String URL_HOST ="http://192.168.1.104:8080/turista-app-server/";
+	final static String URL_HOST = "http://turista.leodufer.cloudbees.net/";
+	//final static String URL_HOST ="http://192.168.1.102:8080/turista-app-server/";
 	final static String URL_SERVICE=URL_HOST+"service/lugares";
 	final static String URL_SERVICE_HOTELES=URL_HOST+"service/lugares/hoteles";
 	final static String URL_SERVICE_RESTAURANTES=URL_HOST+"service/lugares/restaurantes";
 	
-	public List<Lugar> getLugar(){
+	public List<Lugar> getLugar(Context context){
 		try{
 		Gson gson = new Gson();
 		InputStream source = doGet(new HttpGet(URL_SERVICE));
 		Reader reader = new InputStreamReader(source);
 		LugaresResult response = gson.fromJson(reader, LugaresResult.class);
+			
+			//LugaresRepository lr = new LugaresRepository(context);
+			//lr.insertarLugares(response.result);
 			return response.result;
 		}catch(Exception e){
-			return new ArrayList<Lugar>();	
+			//LugaresRepository lr = new LugaresRepository(context);
+			//return lr.obtenerLugares();
+			return new ArrayList<Lugar>();
+			
 		}
 	}
 	

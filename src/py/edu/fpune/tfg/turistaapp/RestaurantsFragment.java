@@ -71,7 +71,7 @@ public class RestaurantsFragment extends Fragment {
 				FragmentManager fragmentManager = getFragmentManager();
 				fragmentManager.beginTransaction()
 						.replace(R.id.frame_container, detalleFragment)
-						//.addToBackStack(null)
+						.addToBackStack(null)
 						.commit();
 			}
 		});

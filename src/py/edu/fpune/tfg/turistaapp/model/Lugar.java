@@ -2,19 +2,37 @@ package py.edu.fpune.tfg.turistaapp.model;
 
 import java.util.List;
 
+import com.the9tcat.hadi.annotation.Column;
+import com.the9tcat.hadi.annotation.Table;
+
+@Table(name="categoria")
 public class Lugar {
+	@Column(name="id", primary=true, autoincrement=true)
 	private int id;
+	@Column(name="nombre")
 	private String nombre;
+	@Column(name="descripcion")
 	private String descripcion;
-	private String email; 
+	@Column(name="email")
+	private String email;
+	@Column(name="telefono")
 	private String telefono;
+	@Column(name="web")
 	private String web;
+	@Column(name="direccion")
 	private String direccion;
+	@Column(name="latitud")
 	private double latitud;
+	@Column(name="longitud")
 	private double longitud;
+	
 	private Categoria categoria;
+	
+	@Column(name="recomentacion")
 	private int recomendacion;
+	
 	private List<Recurso> recursos;
+	
 	public int getId() {
 		return id;
 	}

@@ -2,13 +2,16 @@ package py.edu.fpune.tfg.turistaapp;
 
 import py.edu.fpune.tfg.turistaapp.model.Lugar;
 import android.app.Fragment;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,10 +25,11 @@ public class MasDetallesFragment extends Fragment {
 	private TextView telefono;
 	private TextView email;
 	private TextView web;
-	private LinearLayout layoutTelefono;
-	private LinearLayout layoutEmail;
-	private LinearLayout layoutWeb;
-	
+	private ImageButton imgButtonCall;
+	private ImageButton imgButtonEmail;
+	private ImageButton imgButtonWeb;
+	private Button buttonTrace;
+	private Button buttonShare;
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -57,33 +61,80 @@ public class MasDetallesFragment extends Fragment {
         web = (TextView) rootView.findViewById(R.id.text_web_detalle);
         web.setText(l.getWeb());
         
-        layoutTelefono = (LinearLayout) rootView.findViewById(R.id.layout_telefono);
-        layoutTelefono.setOnTouchListener(new OnTouchListener() {
+        imgButtonCall = (ImageButton) rootView.findViewById(R.id.imageButtonCall);
+        imgButtonCall.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public boolean onTouch(View view, MotionEvent event) {
-				Toast.makeText(getActivity(), "Llamar", Toast.LENGTH_LONG).show();
-				return false;
+			public void onClick(View arg0) {
+				 String posted_by = l.getTelefono();
+
+				 String uri = "tel:" + posted_by.trim() ;
+				 Intent intent = new Intent(Intent.ACTION_DIAL);
+				 intent.setData(Uri.parse(uri));
+				 startActivity(intent);
+				
 			}
 		});
         
-        layoutEmail = (LinearLayout) rootView.findViewById(R.id.layout_email);
-        layoutEmail.setOnTouchListener(new OnTouchListener() {
+        imgButtonEmail = (ImageButton) rootView.findViewById(R.id.imageButtonEmail);
+        imgButtonEmail.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public boolean onTouch(View view, MotionEvent event) {
-				Toast.makeText(getActivity(), "Email", Toast.LENGTH_LONG).show();
-				return false;
+			public void onClick(View arg0) {
+				Intent email = new Intent(Intent.ACTION_SEND);
+				email.putExtra(Intent.EXTRA_EMAIL, new String[]{l.getEmail()});		  
+				email.putExtra(Intent.EXTRA_SUBJECT, "Consulta via TuristaApp");
+				//email.putExtra(Intent.EXTRA_TEXT, "");
+				email.setType("message/rfc822");
+				startActivity(Intent.createChooser(email, "Choose an Email client :"));
 			}
 		});
         
-        layoutWeb = (LinearLayout) rootView.findViewById(R.id.layout_web);
-        layoutWeb.setOnTouchListener(new OnTouchListener() {
+        imgButtonWeb = (ImageButton) rootView.findViewById(R.id.imageButtonWeb);
+        imgButtonWeb.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public boolean onTouch(View view, MotionEvent event) {
-				Toast.makeText(getActivity(), "Web", Toast.LENGTH_LONG).show();
-				return false;
+			public void onClick(View arg0) {
+						Intent intent;
+						String uri = l.getWeb();
+						if(uri.length()>0){
+						if(!uri.substring(0, 7).equals("http://")){
+							uri = "http://"+uri;
+							intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+						}else{
+							intent = new Intent(Intent.ACTION_VIEW, Uri.parse(l.getWeb()));
+						}
+							startActivity(intent);
+						}else{
+							Toast.makeText(getActivity().getApplicationContext(), "Direccion no disponible",Toast.LENGTH_SHORT ).show();;
+						}
+						
+			}
+		});
+        
+        buttonTrace = (Button) rootView.findViewById(R.id.button_como);
+        buttonTrace.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, 
+					    Uri.parse("http://maps.google.com/maps?f=d&daddr="+l.getLatitud()+","+l.getLongitud()));
+					intent.setComponent(new ComponentName("com.google.android.apps.maps", 
+					    "com.google.android.maps.MapsActivity"));
+					startActivity(intent);
+				
+			}
+		});
+        
+        buttonShare = (Button) rootView.findViewById(R.id.button_share);
+        buttonShare.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+			    sharingIntent.setType("text/plain");
+			    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,l.getNombre()+" "+l.getDescripcion()+" "+l.getLatitud()+","+l.getLongitud()+" via #turistaApp");
+			    startActivity(Intent.createChooser(sharingIntent, "Share using"));
 			}
 		});
         return rootView;
